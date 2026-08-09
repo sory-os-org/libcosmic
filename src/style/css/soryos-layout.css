@@ -1,0 +1,259 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SoryOS Layout Patterns — Layout helpers for common UI patterns
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── App Shell: Sidebar + Content ────────────────────────────────── */
+.app-shell {
+    display: flex;
+    width: fill;
+    height: fill;
+}
+
+.app-sidebar {
+    width: 240px;
+    height: fill;
+    background: #0d1117;
+    border-right: 1px solid #1c2333;
+}
+
+.app-content {
+    width: fill;
+    height: fill;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+/* ── Header + Content ────────────────────────────────────────────── */
+.header-content {
+    display: flex;
+    flex-direction: column;
+    width: fill;
+    height: fill;
+}
+
+.header {
+    padding: 10px 16px;
+    border-bottom: 1px solid #1c2333;
+}
+
+.content {
+    width: fill;
+    height: fill;
+    padding: 16px;
+}
+
+/* ── Grid Layout (files, store) ──────────────────────────────────── */
+.grid-2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.grid-3 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.grid-4 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+/* ── Card Grid Items ─────────────────────────────────────────────── */
+.grid-item-2 {
+    flex: 1 1 calc(50% - 6px);
+}
+
+.grid-item-3 {
+    flex: 1 1 calc(33.333% - 11px);
+}
+
+.grid-item-4 {
+    flex: 1 1 calc(25% - 12px);
+}
+
+/* ── Split Layout (sidebar + main + detail) ──────────────────────── */
+.split-layout {
+    display: flex;
+    width: fill;
+    height: fill;
+}
+
+.split-sidebar {
+    width: 240px;
+    height: fill;
+}
+
+.split-main {
+    flex: 1;
+    height: fill;
+    display: flex;
+    flex-direction: column;
+}
+
+.split-detail {
+    width: 320px;
+    height: fill;
+    border-left: 1px solid #1c2333;
+}
+
+/* ── Toolbar + Content ───────────────────────────────────────────── */
+.toolbar-layout {
+    display: flex;
+    flex-direction: column;
+    width: fill;
+    height: fill;
+}
+
+.toolbar {
+    padding: 8px 16px;
+    border-bottom: 1px solid #1c2333;
+}
+
+.toolbar-content {
+    width: fill;
+    height: fill;
+    padding: 16px;
+}
+
+/* ── Chat Layout ─────────────────────────────────────────────────── */
+.chat-layout {
+    display: flex;
+    flex-direction: column;
+    width: fill;
+    height: fill;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.chat-input {
+    padding: 12px 16px;
+    border-top: 1px solid #1c2333;
+}
+
+/* ── Settings Layout ─────────────────────────────────────────────── */
+.settings-layout {
+    display: flex;
+    width: fill;
+    height: fill;
+}
+
+.settings-sidebar {
+    width: 240px;
+    height: fill;
+    border-right: 1px solid #1c2333;
+}
+
+.settings-content {
+    flex: 1;
+    height: fill;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+/* ── Flex Utilities ──────────────────────────────────────────────── */
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+/* ── Gap Utilities ───────────────────────────────────────────────── */
+.gap-xs { gap: 4px; }
+.gap-sm { gap: 8px; }
+.gap-md { gap: 16px; }
+.gap-lg { gap: 24px; }
+.gap-xl { gap: 32px; }
+
+/* ── Padding Utilities ───────────────────────────────────────────── */
+.p-0 { padding: 0; }
+.p-xs { padding: 4px; }
+.p-sm { padding: 8px; }
+.p-md { padding: 16px; }
+.p-lg { padding: 24px; }
+.p-xl { padding: 32px; }
+
+.px-sm { padding-left: 8px; padding-right: 8px; }
+.px-md { padding-left: 16px; padding-right: 16px; }
+.px-lg { padding-left: 24px; padding-right: 24px; }
+
+.py-sm { padding-top: 8px; padding-bottom: 8px; }
+.py-md { padding-top: 16px; padding-bottom: 16px; }
+.py-lg { padding-top: 24px; padding-bottom: 24px; }
+
+/* ── Margin Utilities ────────────────────────────────────────────── */
+.m-0 { margin: 0; }
+.m-xs { margin: 4px; }
+.m-sm { margin: 8px; }
+.m-md { margin: 16px; }
+.m-lg { margin: 24px; }
+
+/* ── Width/Height Utilities ──────────────────────────────────────── */
+.w-full { width: fill; }
+.h-full { height: fill; }
+.w-auto { width: auto; }
+.h-auto { height: auto; }
+
+/* ── Overflow Utilities ──────────────────────────────────────────── */
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow-y: auto; }
+.overflow-x-auto { overflow-x: auto; }
+
+/* ── Text Utilities ──────────────────────────────────────────────── */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-bold { font-weight: 700; }
+.text-italic { font-style: italic; }
+
+/* ── Border Utilities ────────────────────────────────────────────── */
+.border-bottom { border-bottom: 1px solid #1c2333; }
+.border-top { border-top: 1px solid #1c2333; }
+.border-left { border-left: 1px solid #1c2333; }
+.border-right { border-right: 1px solid #1c2333; }
+
+/* ── Rounded Utilities ───────────────────────────────────────────── */
+.rounded-sm { border-radius: 4px; }
+.rounded-md { border-radius: 8px; }
+.rounded-lg { border-radius: 12px; }
+.rounded-xl { border-radius: 16px; }
+.rounded-full { border-radius: 9999px; }

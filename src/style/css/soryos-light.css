@@ -1,0 +1,665 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SoryOS Light Theme — Clean White Glass
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Fond global ─────────────────────────────────────────────────── */
+* {
+    background: #ffffff;
+    color: #1f2328;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────── */
+Sidebar {
+    background: #f6f8fa;
+    width: 240px;
+    padding: 8px 0;
+    border-radius: 0;
+    border-right: 1px solid #d0d7de;
+}
+
+Sidebar .nav-section {
+    padding: 4px 12px;
+}
+
+Sidebar .nav-item {
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: #656d76;
+    gap: 8px;
+    font-size: 14px;
+}
+
+Sidebar .nav-item:hover {
+    background: #eaeef2;
+    color: #1f2328;
+}
+
+Sidebar .nav-item.active {
+    background: #ddf4ff;
+    color: #0969da;
+}
+
+Sidebar .nav-item.active .accent-bar {
+    width: 3px;
+    background: #0969da;
+}
+
+Sidebar .nav-badge {
+    background: #0969da;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 2px 6px;
+    font-size: 11px;
+}
+
+Sidebar .nav-search {
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #d0d7de;
+    padding: 6px 10px;
+    color: #1f2328;
+}
+
+Sidebar .section-label {
+    color: #656d76;
+    font-size: 11px;
+    padding: 12px 12px 4px;
+    text-transform: uppercase;
+}
+
+/* ── Boutons ─────────────────────────────────────────────────────── */
+Button {
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+Button.primary {
+    background: #0969da;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 8px 20px;
+}
+
+Button.primary:hover {
+    background: #218bff;
+}
+
+Button.primary:active {
+    background: #0550ae;
+}
+
+Button.secondary {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    color: #1f2328;
+}
+
+Button.secondary:hover {
+    background: #eaeef2;
+}
+
+Button.ghost {
+    background: transparent;
+    color: #656d76;
+}
+
+Button.ghost:hover {
+    background: #eaeef2;
+    color: #1f2328;
+}
+
+Button.destructive {
+    background: #cf222e;
+    color: #ffffff;
+}
+
+Button.icon {
+    background: transparent;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+Button.icon:hover {
+    background: #eaeef2;
+}
+
+/* ── Cartes ──────────────────────────────────────────────────────── */
+Card {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+Card.elevated {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+    padding: 16px;
+    shadow: 0 1px 3px rgba(31, 35, 40, 0.12);
+}
+
+Card.folder {
+    background: linear-gradient(135deg, #ddf4ff, #f0f7ff);
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+Card.folder:hover {
+    border-color: #0969da;
+    box-shadow: 0 0 0 1px #0969da;
+}
+
+Card.folder.selected {
+    background: linear-gradient(135deg, #ddf4ff, #e6f3ff);
+    border: 1px solid #0969da;
+}
+
+Card.settings-item {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+
+Card.settings-item:hover {
+    background: #f6f8fa;
+}
+
+Card.app-card {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+Card.app-card:hover {
+    border-color: #0969da;
+}
+
+/* ── Input / Search ──────────────────────────────────────────────── */
+TextInput {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #1f2328;
+}
+
+TextInput:focus {
+    border-color: #0969da;
+    box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.15);
+}
+
+TextInput.search {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    padding: 6px 10px;
+    color: #1f2328;
+}
+
+/* ── Dialog ──────────────────────────────────────────────────────── */
+Dialog {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 16px;
+    padding: 24px;
+    shadow: 0 16px 48px rgba(31, 35, 40, 0.2);
+}
+
+/* ── Toast ───────────────────────────────────────────────────────── */
+Toast {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+    padding: 12px 16px;
+    shadow: 0 8px 24px rgba(31, 35, 40, 0.15);
+}
+
+Toast.success {
+    border-left: 3px solid #1a7f37;
+}
+
+Toast.error {
+    border-left: 3px solid #cf222e;
+}
+
+Toast.warning {
+    border-left: 3px solid #9a6700;
+}
+
+Toast.info {
+    border-left: 3px solid #0969da;
+}
+
+/* ── Toggle / Switch ─────────────────────────────────────────────── */
+Toggle {
+    background: #d0d7de;
+    border-radius: 12px;
+    width: 44px;
+    height: 24px;
+}
+
+Toggle.on {
+    background: #0969da;
+}
+
+/* ── Progress Bar ────────────────────────────────────────────────── */
+ProgressBar {
+    background: #d0d7de;
+    border-radius: 4px;
+    height: 6px;
+}
+
+ProgressBar .fill {
+    background: #0969da;
+    border-radius: 4px;
+}
+
+ProgressBar.success .fill {
+    background: #1a7f37;
+}
+
+ProgressBar.warning .fill {
+    background: #9a6700;
+}
+
+ProgressBar.error .fill {
+    background: #cf222e;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────── */
+TabBar {
+    background: transparent;
+    border-bottom: 1px solid #d0d7de;
+}
+
+TabItem {
+    padding: 8px 16px;
+    color: #656d76;
+    border-bottom: 2px solid transparent;
+}
+
+TabItem.active {
+    color: #1f2328;
+    border-bottom-color: #0969da;
+}
+
+TabItem:hover {
+    color: #1f2328;
+}
+
+/* ── Table ───────────────────────────────────────────────────────── */
+Table {
+    background: transparent;
+    border-radius: 8px;
+}
+
+Table .header {
+    background: #f6f8fa;
+    color: #656d76;
+    font-size: 12px;
+    padding: 8px 12px;
+    border-bottom: 1px solid #d0d7de;
+}
+
+Table .row {
+    padding: 8px 12px;
+    border-bottom: 1px solid #d0d7de;
+}
+
+Table .row:hover {
+    background: #f6f8fa;
+}
+
+Table .row.selected {
+    background: #ddf4ff;
+}
+
+/* ── Breadcrumbs ─────────────────────────────────────────────────── */
+Breadcrumb {
+    color: #656d76;
+    font-size: 13px;
+    gap: 4px;
+}
+
+Breadcrumb .separator {
+    color: #8c959f;
+}
+
+Breadcrumb .item {
+    color: #656d76;
+}
+
+Breadcrumb .item:hover {
+    color: #0969da;
+}
+
+Breadcrumb .item.current {
+    color: #1f2328;
+}
+
+/* ── Badge ───────────────────────────────────────────────────────── */
+Badge {
+    background: #eaeef2;
+    color: #656d76;
+    border-radius: 10px;
+    padding: 2px 8px;
+    font-size: 12px;
+}
+
+Badge.primary {
+    background: rgba(9, 105, 218, 0.1);
+    color: #0969da;
+}
+
+Badge.success {
+    background: rgba(26, 127, 55, 0.1);
+    color: #1a7f37;
+}
+
+Badge.warning {
+    background: rgba(154, 103, 0, 0.1);
+    color: #9a6700;
+}
+
+Badge.error {
+    background: rgba(207, 34, 46, 0.1);
+    color: #cf222e;
+}
+
+/* ── Avatar ──────────────────────────────────────────────────────── */
+Avatar {
+    background: #eaeef2;
+    border-radius: 50%;
+    color: #1f2328;
+}
+
+Avatar.sm { width: 32px; height: 32px; }
+Avatar.md { width: 40px; height: 40px; }
+Avatar.lg { width: 56px; height: 56px; }
+Avatar.xl { width: 80px; height: 80px; }
+
+/* ── Code ────────────────────────────────────────────────────────── */
+CodeBlock {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    padding: 16px;
+    font-family: monospace;
+    font-size: 13px;
+    color: #1f2328;
+    overflow-x: auto;
+}
+
+/* ── Markdown ────────────────────────────────────────────────────── */
+Markdown h1 { font-size: 28px; font-weight: 700; color: #1f2328; margin-bottom: 16px; }
+Markdown h2 { font-size: 22px; font-weight: 600; color: #1f2328; margin-bottom: 12px; }
+Markdown h3 { font-size: 18px; font-weight: 600; color: #1f2328; margin-bottom: 8px; }
+Markdown p { font-size: 14px; line-height: 1.6; color: #1f2328; margin-bottom: 8px; }
+Markdown ul { padding-left: 20px; margin-bottom: 8px; }
+Markdown li { font-size: 14px; line-height: 1.6; color: #1f2328; margin-bottom: 4px; }
+Markdown strong { font-weight: 600; color: #1f2328; }
+Markdown em { font-style: italic; color: #1f2328; }
+Markdown code {
+    background: rgba(110, 118, 129, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 13px;
+    color: #cf222e;
+}
+Markdown pre {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+}
+Markdown blockquote {
+    border-left: 3px solid #0969da;
+    padding-left: 12px;
+    color: #656d76;
+}
+
+/* ── Toolbar ─────────────────────────────────────────────────────── */
+Toolbar {
+    background: #ffffff;
+    border-bottom: 1px solid #d0d7de;
+    padding: 8px 16px;
+}
+
+/* ── HeaderBar ───────────────────────────────────────────────────── */
+HeaderBar {
+    background: #ffffff;
+    border-bottom: 1px solid #d0d7de;
+    padding: 10px 16px;
+}
+
+/* ── Context Drawer ──────────────────────────────────────────────── */
+ContextDrawer {
+    background: #f6f8fa;
+    border-left: 1px solid #d0d7de;
+    padding: 16px;
+}
+
+/* ── Divider ─────────────────────────────────────────────────────── */
+Divider {
+    background: #d0d7de;
+    height: 1px;
+}
+
+/* ── Workspace ───────────────────────────────────────────────────── */
+Workspace {
+    background: #ffffff;
+    color: #1f2328;
+}
+
+Workspace .panel {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+}
+
+/* ── Stat Card ───────────────────────────────────────────────────── */
+StatCard {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+StatCard .value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2328;
+}
+
+StatCard .label {
+    font-size: 13px;
+    color: #656d76;
+}
+
+/* ── Skeleton ────────────────────────────────────────────────────── */
+Skeleton {
+    background: linear-gradient(90deg, #eaeef2 25%, #d0d7de 50%, #eaeef2 75%);
+    background-size: 200% 100%;
+    border-radius: 8px;
+}
+
+/* ── Tooltip ─────────────────────────────────────────────────────── */
+Tooltip {
+    background: #1f2328;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────── */
+Scrollbar {
+    background: transparent;
+    width: 8px;
+}
+
+Scrollbar:hover {
+    background: #d0d7de;
+}
+
+/* ── Profile Card ────────────────────────────────────────────────── */
+ProfileCard {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+/* ── Categories grid (Store) ─────────────────────────────────────── */
+CategoryChip {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    padding: 6px 12px;
+    color: #656d76;
+    font-size: 13px;
+}
+
+CategoryChip:hover {
+    background: #eaeef2;
+    color: #1f2328;
+}
+
+CategoryChip.active {
+    background: rgba(9, 105, 218, 0.1);
+    border-color: #0969da;
+    color: #0969da;
+}
+
+/* ── Stars rating ────────────────────────────────────────────────── */
+Stars {
+    color: #9a6700;
+    font-size: 12px;
+}
+
+/* ── Hero Banner (Store) ────────────────────────────────────────── */
+HeroBanner {
+    background: linear-gradient(135deg, #ddf4ff, #ffffff);
+    border-radius: 16px;
+    padding: 24px;
+    color: #1f2328;
+}
+
+/* ── List Item (Settings) ────────────────────────────────────────── */
+ListItem {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+
+ListItem:hover {
+    background: #f6f8fa;
+}
+
+ListItem .icon {
+    background: rgba(9, 105, 218, 0.1);
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    color: #0969da;
+}
+
+ListItem .title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1f2328;
+}
+
+ListItem .subtitle {
+    font-size: 13px;
+    color: #656d76;
+}
+
+/* ── Message Bubble (Chat) ──────────────────────────────────────── */
+MessageBubble {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+
+MessageBubble.assistant {
+    background: transparent;
+    border: none;
+    padding: 12px 0;
+}
+
+/* ── Chat Input ──────────────────────────────────────────────────── */
+ChatInput {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #1f2328;
+}
+
+/* ── Action Row (Chat) ──────────────────────────────────────────── */
+ActionRow {
+    background: #f6f8fa;
+    padding: 8px;
+    gap: 4px;
+}
+
+/* ── Status Connected ────────────────────────────────────────────── */
+StatusDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1a7f37;
+}
+
+StatusDot.disconnected {
+    background: #cf222e;
+}
+
+/* ── View Toggle (grid/list) ────────────────────────────────────── */
+ViewToggle {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    padding: 2px;
+}
+
+ViewToggle .active {
+    background: #ffffff;
+    border-radius: 6px;
+}
+
+/* ── Dropdown ────────────────────────────────────────────────────── */
+Dropdown {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    padding: 8px 0;
+    shadow: 0 8px 24px rgba(31, 35, 40, 0.15);
+}
+
+DropdownItem {
+    padding: 6px 12px;
+    color: #1f2328;
+}
+
+DropdownItem:hover {
+    background: #f6f8fa;
+}
+
+DropdownSeparator {
+    background: #d0d7de;
+    height: 1px;
+    margin: 4px 0;
+}
