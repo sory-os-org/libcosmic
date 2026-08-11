@@ -222,7 +222,7 @@ pub fn frames() -> Subscription<(Id, Instant)> {
         _ => None,
     })
 }
-#[cfg(all(feature = "cctk", target_os = "linux"))]
+#[cfg(all(feature = "cctk", any(target_os = "linux", target_os = "redox")))]
 /// Subscribes to the frames of the window of the running application.
 ///
 /// The resulting [`Subscription`] will produce items at a rate equal to the

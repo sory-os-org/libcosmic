@@ -40,7 +40,7 @@ pub mod clipboard;
 pub mod conversion;
 pub mod platform_specific;
 
-#[cfg(all(feature = "wayland", target_os = "linux"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
 pub mod commands {
     pub use crate::platform_specific::wayland::commands::*;
 }
@@ -103,10 +103,10 @@ where
 
     let event_loop = EventLoop::new().expect("Create event loop");
 
-    #[cfg(all(feature = "cctk", target_os = "linux"))]
+    #[cfg(all(feature = "cctk", any(target_os = "linux", target_os = "redox")))]
     let is_wayland =
         winit::platform::wayland::EventLoopExtWayland::is_wayland(&event_loop);
-    #[cfg(not(all(feature = "cctk", target_os = "linux")))]
+    #[cfg(not(all(feature = "cctk", any(target_os = "linux", target_os = "redox"))))]
     let is_wayland = false;
 
     // TODO this is new..
@@ -268,7 +268,7 @@ where
                     | winit::event::WindowEvent::Moved(_)
             );
 
-            #[cfg(all(feature = "cctk", target_os = "linux"))]
+            #[cfg(all(feature = "cctk", any(target_os = "linux", target_os = "redox")))]
             {
                 if matches!(event, WindowEvent::RedrawRequested) {
                     for id in
@@ -577,7 +577,7 @@ where
                                     .expect("Send event");
                             }
                             Control::Winit(id, e) => {
-                                #[cfg(all(feature = "cctk", target_os = "linux"))]
+                                #[cfg(all(feature = "cctk", any(target_os = "linux", target_os = "redox")))]
                                 {
                                     if matches!(e, WindowEvent::RedrawRequested)
                                     {                    
@@ -775,7 +775,7 @@ async fn run_instance<P>(
 
     let mut platform_specific_handler =
         crate::platform_specific::PlatformSpecific::default();
-    #[cfg(all(feature = "cctk", target_os = "linux"))]
+    #[cfg(all(feature = "cctk", any(target_os = "linux", target_os = "redox")))]
     if is_wayland {
         platform_specific_handler = platform_specific_handler.with_wayland(
             control_sender.clone(),
@@ -808,7 +808,7 @@ async fn run_instance<P>(
     #[cfg(feature = "a11y")]
     let mut a11y_enabled = false;
 
-    #[cfg(all(feature = "linux-theme-detection", target_os = "linux"))]
+    #[cfg(all(feature = "linux-theme-detection", any(target_os = "linux", target_os = "redox")))]
     let mut system_theme = {
         let to_mode = |color_scheme| match color_scheme {
             mundy::ColorScheme::NoPreference => theme::Mode::None,
@@ -837,7 +837,7 @@ async fn run_instance<P>(
             .unwrap_or_default()
     };
 
-    #[cfg(not(all(feature = "linux-theme-detection", target_os = "linux")))]
+    #[cfg(not(all(feature = "linux-theme-detection", any(target_os = "linux", target_os = "redox"))))]
     let mut system_theme =
         _system_theme.try_recv().ok().flatten().unwrap_or_default();
 
@@ -887,7 +887,7 @@ async fn run_instance<P>(
                 resize_border
             } => {
                 
-                #[cfg(all(feature = "cctk", target_os = "linux"))]
+                #[cfg(all(feature = "cctk", any(target_os = "linux", target_os = "redox")))]
                 platform_specific_handler.send_wayland(
                     platform_specific::Action::TrackWindow(window.clone(), id),
                 );
@@ -1056,7 +1056,7 @@ async fn run_instance<P>(
                     continue;
                 } 
                 // XX must force update to corner radius before the surface is committed.
-                #[cfg(all(feature = "cctk", target_os = "linux"))]
+                #[cfg(all(feature = "cctk", any(target_os = "linux", target_os = "redox")))]
                 if (window.surface_version != window.state.surface_version()
                     || window.logical_size() != window.state.logical_size()
                     ) && !crate::subsurface_widget::is_subsurface(window_id)
@@ -1396,7 +1396,7 @@ async fn run_instance<P>(
                         }
                     });
                     let no_window_events = window_events.is_empty();
-                    #[cfg(all(feature = "cctk", target_os = "linux"))]
+                    #[cfg(all(feature = "cctk", any(target_os = "linux", target_os = "redox")))]
                     window_events.push(core::Event::PlatformSpecific(
                         core::event::PlatformSpecific::Wayland(
                             core::event::wayland::Event::RequestResize,
@@ -2129,7 +2129,7 @@ where
                     _ = control_sender.start_send(Control::Cleanup(id)).ok();
                 }
                 let proxy = clipboard.proxy();
-                #[cfg(all(feature = "cctk", target_os = "linux"))]
+                #[cfg(all(feature = "cctk", any(target_os = "linux", target_os = "redox")))]
                 platform_specific
                     .send_wayland(platform_specific::Action::RemoveWindow(id));
                 if let Some(window) = window_manager.remove(id) {

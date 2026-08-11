@@ -193,7 +193,7 @@ where
     pub(super) on_reorder: Option<Box<dyn Fn(ReorderEvent) -> Message + 'static>>,
     #[setters(skip)]
     window_id: window::Id,
-    #[cfg(all(feature = "wayland", target_os = "linux"))]
+    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
     positioner: iced_runtime::platform_specific::wayland::popup::SctkPositioner,
     #[setters(skip)]
     pub(crate) on_surface_action:
@@ -250,7 +250,7 @@ where
             on_drop_hint: None,
             on_reorder: None,
             window_id: window::Id::RESERVED,
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             positioner: iced_runtime::platform_specific::wayland::popup::SctkPositioner::default(),
             on_surface_action: None,
         }

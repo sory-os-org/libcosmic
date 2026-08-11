@@ -387,7 +387,7 @@ pub use toggler::{Toggler, toggler};
 #[doc(inline)]
 pub use tooltip::{Tooltip, tooltip};
 
-#[cfg(all(feature = "wayland", target_os = "linux", feature = "winit"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox"), feature = "winit"))]
 pub mod wayland;
 
 pub mod tooltip {

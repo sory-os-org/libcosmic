@@ -6,20 +6,20 @@ use std::collections::HashMap;
 use std::sync::Arc;
 
 use super::{Action, Application, ApplicationExt, Subscription};
-#[cfg(all(feature = "wayland", target_os = "linux"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
 use crate::core::Auto;
-#[cfg(all(feature = "wayland", target_os = "linux"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
 use crate::surface::action::LiveSettings;
 use crate::theme::{THEME, Theme, ThemeType};
 use crate::{Core, Element, keyboard_nav};
-#[cfg(all(feature = "wayland", target_os = "linux"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
 use cctk::sctk::reexports::csd_frame::{WindowManagerCapabilities, WindowState};
 use cosmic_theme::ThemeMode;
-#[cfg(all(feature = "wayland", target_os = "linux"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
 use enumflags2::BitFlags;
-#[cfg(not(any(feature = "multi-window", all(feature = "wayland", target_os = "linux"))))]
+#[cfg(not(any(feature = "multi-window", all(feature = "wayland", any(target_os = "linux", target_os = "redox")))))]
 use iced::Application as IcedApplication;
-#[cfg(all(feature = "wayland", target_os = "linux"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
 use iced::event::wayland;
 use iced::{Task, theme, window};
 use iced_futures::event::listen_with;
@@ -116,7 +116,7 @@ where
     pub fn init(
         (mut core, flags): (Core, T::Flags),
     ) -> (Self, iced::Task<crate::Action<T::Message>>) {
-        #[cfg(all(feature = "dbus-config", target_os = "linux"))]
+        #[cfg(all(feature = "dbus-config", any(target_os = "linux", target_os = "redox")))]
         {
             use iced_futures::futures::executor::block_on;
             core.settings_daemon = block_on(cosmic_config::dbus::settings_daemon_proxy()).ok();
@@ -158,7 +158,7 @@ where
     ) -> iced::Task<crate::Action<T::Message>> {
         #[cfg(feature = "surface-message")]
         match _surface_message {
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::AppSubsurface(settings, live_settings, view) => {
                 let Some(settings) = std::sync::Arc::try_unwrap(settings)
                     .ok()
@@ -185,7 +185,7 @@ where
                 });
                 self.get_subsurface(settings, view.map(|v| *v))
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::Subsurface(settings, live_settings, view) => {
                 let Some(settings) = std::sync::Arc::try_unwrap(settings)
                     .ok()
@@ -212,7 +212,7 @@ where
                     self.get_subsurface(settings, None)
                 }
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::AppPopup(settings, live_settings, view) => {
                 let Some(settings) = std::sync::Arc::try_unwrap(settings)
                     .ok()
@@ -249,11 +249,11 @@ where
 
                 self.get_popup(settings, *live_settings, view.map(|v| *v))
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::DestroyPopup(id) => {
                 iced_winit::commands::popup::destroy_popup(id)
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::DestroyTooltipPopup => {
                 #[cfg(feature = "applet")]
                 {
@@ -264,11 +264,11 @@ where
                     Task::none()
                 }
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::DestroySubsurface(id) => {
                 iced_winit::commands::subsurface::destroy_subsurface(id)
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::DestroyWindow(id) => iced::window::close(id),
             crate::surface::Action::ResponsiveMenuBar {
                 menu_bar,
@@ -279,7 +279,7 @@ where
                 core.menu_bars.insert(menu_bar, (limits, size));
                 iced::Task::none()
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::Popup(settings, live_settings, view) => {
                 let Some(settings) = std::sync::Arc::try_unwrap(settings)
                     .ok()
@@ -318,7 +318,7 @@ where
                     self.get_popup(settings, live_settings, None)
                 }
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::AppWindow(id, settings, live_settings, view) => {
                 let Some(settings) = std::sync::Arc::try_unwrap(settings).ok().and_then(|s| {
                     s.downcast::<Box<dyn Fn(&mut T) -> iced::window::Settings + Send + Sync>>()
@@ -356,7 +356,7 @@ where
 
                 self.get_window(id, settings, *live_settings, view.map(|v| *v))
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::Window(id, settings, live_settings, view) => {
                 let Some(settings) = std::sync::Arc::try_unwrap(settings).ok().and_then(|s| {
                     s.downcast::<Box<dyn Fn() -> iced::window::Settings + Send + Sync>>()
@@ -413,7 +413,7 @@ where
             crate::surface::Action::Task(f) => {
                 f().map(|sm| crate::Action::Cosmic(Action::Surface(sm)))
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::AppLayerShell(settings, live_settings, view) => {
                 let Some(settings) = std::sync::Arc::try_unwrap(settings)
                     .ok()
@@ -451,7 +451,7 @@ where
 
                 self.get_layer_shell(settings, *live_settings, view.map(|v| *v))
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::LayerShell(settings, live_settings, view) => {
                 let Some(settings) = std::sync::Arc::try_unwrap(settings)
                     .ok()
@@ -491,7 +491,7 @@ where
                     self.get_layer_shell(settings, live_settings, None)
                 }
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             crate::surface::Action::DestroyLayerShell(id) => {
                 iced_winit::commands::layer_surface::destroy_layer_surface(id)
             }
@@ -579,7 +579,7 @@ where
                 }
                 iced::Event::Window(window::Event::Focused) => return Some(Action::Focus(id)),
                 iced::Event::Window(window::Event::Unfocused) => return Some(Action::Unfocus(id)),
-                #[cfg(all(feature = "wayland", target_os = "linux"))]
+                #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                 iced::Event::PlatformSpecific(iced::event::PlatformSpecific::Wayland(event)) => {
                     match event {
                         wayland::Event::Popup(wayland::PopupEvent::Done, _, id)
@@ -592,7 +592,7 @@ where
                         ) => {
                             return Some(Action::SuggestedBounds(b));
                         }
-                        #[cfg(all(feature = "wayland", target_os = "linux"))]
+                        #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                         wayland::Event::Window(iced::event::wayland::WindowEvent::WindowState(
                             s,
                         )) => {
@@ -762,7 +762,7 @@ impl<T: Application> Cosmic<T> {
     fn cosmic_update(&mut self, message: Action) -> iced::Task<crate::Action<T::Message>> {
         match message {
             Action::WindowMaximized(id, maximized) => {
-                #[cfg(not(all(feature = "wayland", target_os = "linux")))]
+                #[cfg(not(all(feature = "wayland", any(target_os = "linux", target_os = "redox"))))]
                 if self
                     .app
                     .core()
@@ -792,7 +792,7 @@ impl<T: Application> Cosmic<T> {
                 });
             }
 
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             Action::WindowState(id, state) => {
                 if self
                     .app
@@ -824,7 +824,7 @@ impl<T: Application> Cosmic<T> {
                 }
             }
 
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             Action::WmCapabilities(id, capabilities) => {
                 if self
                     .app
@@ -911,7 +911,7 @@ impl<T: Application> Cosmic<T> {
                 guard.transparent = new_blur;
                 drop(guard);
 
-                #[cfg(all(feature = "wayland", target_os = "linux"))]
+                #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                 {
                     let core = self.app.core();
                     let mut cmds = Vec::with_capacity(1 + self.surface_views.len());
@@ -986,7 +986,7 @@ impl<T: Application> Cosmic<T> {
                         cosmic_theme.set_theme(new_theme.theme_type);
                         cosmic_theme.transparent = new_blur;
 
-                        #[cfg(all(feature = "wayland", target_os = "linux"))]
+                        #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                         {
                             use iced_winit::platform_specific::commands::corner_radius::corner_radius;
 
@@ -1119,7 +1119,7 @@ impl<T: Application> Cosmic<T> {
                         if let ThemeType::System { .. } = cosmic_theme.theme_type {
                             cosmic_theme.set_theme(new_theme.theme_type);
                             cosmic_theme.transparent = new_blur;
-                            #[cfg(all(feature = "wayland", target_os = "linux"))]
+                            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                             {
                                 use iced_winit::platform_specific::commands::corner_radius::corner_radius;
 
@@ -1193,7 +1193,7 @@ impl<T: Application> Cosmic<T> {
                     // Unminimize window before requesting to activate it.
                     let mut task = iced_runtime::window::minimize(id, false);
 
-                    #[cfg(all(feature = "wayland", target_os = "linux"))]
+                    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                     {
                         task = task.chain(
                             iced_winit::platform_specific::commands::activation::activate(
@@ -1204,7 +1204,7 @@ impl<T: Application> Cosmic<T> {
                         );
                     }
 
-                    #[cfg(not(all(feature = "wayland", target_os = "linux")))]
+                    #[cfg(not(all(feature = "wayland", any(target_os = "linux", target_os = "redox"))))]
                     {
                         task = task.chain(iced_runtime::window::gain_focus(id));
                     }
@@ -1301,7 +1301,7 @@ impl<T: Application> Cosmic<T> {
                         // Only apply update if the theme is set to load a system theme
                         if let ThemeType::System { theme: _, .. } = cosmic_theme.theme_type {
                             let mut cmds = Vec::with_capacity(1);
-                            #[cfg(all(feature = "wayland", target_os = "linux"))]
+                            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                             {
                                 let blur = if cosmic_theme.transparent {
                                     iced::window::enable_blur
@@ -1378,7 +1378,7 @@ impl<T: Application> Cosmic<T> {
             }
 
             Action::Focus(f) => {
-                #[cfg(all(feature = "wayland", target_os = "linux"))]
+                #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                 if let Some((
                     parent,
                     SurfaceIdWrapper::Subsurface(_) | SurfaceIdWrapper::Popup(_),
@@ -1423,7 +1423,7 @@ impl<T: Application> Cosmic<T> {
                 core.applet.suggested_bounds = b;
             }
             Action::Opened(id) => {
-                #[cfg(all(feature = "wayland", target_os = "linux"))]
+                #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                 {
                     use iced_winit::platform_specific::commands::corner_radius::corner_radius;
 
@@ -1506,7 +1506,7 @@ impl<T: Application> Cosmic<T> {
                 }
                 return iced_runtime::window::run_with_handle(id, init_windowing_system);
             }
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             Action::BlurEnabled => {
                 // TODO do this after blur event confirms support instead of for all wayland windows
                 self.blur_enabled = true;
@@ -1586,7 +1586,7 @@ impl<App: Application> Cosmic<App> {
                 if matches!(id_wrapper, SurfaceIdWrapper::Window(_)) {
                     window::enable_blur(id)
                 } else {
-                    #[cfg(all(feature = "wayland", target_os = "linux"))]
+                    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                     {
                         iced_winit::commands::blur::blur::<crate::Action<App::Message>>(
                             id,
@@ -1597,7 +1597,7 @@ impl<App: Application> Cosmic<App> {
                         )
                         .discard()
                     }
-                    #[cfg(not(all(feature = "wayland", target_os = "linux")))]
+                    #[cfg(not(all(feature = "wayland", any(target_os = "linux", target_os = "redox"))))]
                     {
                         iced::window::enable_blur(id)
                     }
@@ -1605,11 +1605,11 @@ impl<App: Application> Cosmic<App> {
             } else if matches!(id_wrapper, SurfaceIdWrapper::Window(_)) {
                 window::disable_blur(id)
             } else {
-                #[cfg(all(feature = "wayland", target_os = "linux"))]
+                #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                 {
                     iced_winit::commands::blur::blur::<crate::Action<App::Message>>(id, None).discard()
                 }
-                #[cfg(not(all(feature = "wayland", target_os = "linux")))]
+                #[cfg(not(all(feature = "wayland", any(target_os = "linux", target_os = "redox"))))]
                 {
                     iced::window::disable_blur(id)
                 }
@@ -1619,7 +1619,7 @@ impl<App: Application> Cosmic<App> {
             cmds.push(if matches!(id_wrapper, SurfaceIdWrapper::Window(_)) {
                 window::enable_blur(id)
             } else {
-                #[cfg(all(feature = "wayland", target_os = "linux"))]
+                #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                 {
                     iced_winit::commands::blur::blur::<crate::Action<App::Message>>(
                         id,
@@ -1630,13 +1630,13 @@ impl<App: Application> Cosmic<App> {
                     )
                     .discard()
                 }
-                #[cfg(not(all(feature = "wayland", target_os = "linux")))]
+                #[cfg(not(all(feature = "wayland", any(target_os = "linux", target_os = "redox"))))]
                 {
                     iced::window::enable_blur(id)
                 }
             });
         }
-        #[cfg(all(feature = "wayland", target_os = "linux"))]
+        #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
         {
             if let Some(corners) = live_settings.corners {
                 cmds.push(
@@ -1656,7 +1656,7 @@ impl<App: Application> Cosmic<App> {
                 }
             }
         }
-        #[cfg(all(feature = "wayland", target_os = "linux"))]
+        #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
         if let (SurfaceIdWrapper::LayerSurface(id), Some(padding)) =
             (id_wrapper, live_settings.padding)
         {
@@ -1667,7 +1667,7 @@ impl<App: Application> Cosmic<App> {
         Task::batch(cmds)
     }
 
-    #[cfg(all(feature = "wayland", target_os = "linux"))]
+    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
     /// Create a subsurface
     pub fn get_subsurface(
         &mut self,
@@ -1699,7 +1699,7 @@ impl<App: Application> Cosmic<App> {
         Task::batch([live_settings_task, get_subsurface(settings)])
     }
 
-    #[cfg(all(feature = "wayland", target_os = "linux"))]
+    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
     /// Create a subsurface
     pub fn get_popup(
         &mut self,
@@ -1727,7 +1727,7 @@ impl<App: Application> Cosmic<App> {
         live_settings_task.chain(get_popup(settings)).discard()
     }
 
-    #[cfg(all(feature = "wayland", target_os = "linux"))]
+    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
     /// Create a window surface
     pub fn get_window(
         &mut self,
@@ -1764,7 +1764,7 @@ impl<App: Application> Cosmic<App> {
         ])
     }
 
-    #[cfg(all(feature = "wayland", target_os = "linux"))]
+    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
     pub fn get_layer_shell(
         &mut self,
         settings: iced_runtime::platform_specific::wayland::layer_surface::SctkLayerSurfaceSettings,
@@ -1793,7 +1793,7 @@ impl<App: Application> Cosmic<App> {
     }
 }
 
-#[cfg(all(feature = "wayland", target_os = "linux"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
 fn corners(
     surface_type: SurfaceIdWrapper,
     rounded: bool,

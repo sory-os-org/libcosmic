@@ -32,7 +32,7 @@ mod text_input;
 #[doc(inline)]
 pub use self::text_input::TextInput;
 
-#[cfg(all(feature = "wayland", target_os = "linux", feature = "winit"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox"), feature = "winit"))]
 pub mod tooltip;
-#[cfg(all(feature = "wayland", target_os = "linux", feature = "winit"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox"), feature = "winit"))]
 pub use tooltip::Tooltip;

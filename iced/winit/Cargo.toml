@@ -60,7 +60,7 @@ iced_debug = { workspace = true }
 iced_program = { workspace = true }
 
 
-[target.'cfg(target_os = "linux")'.dependencies]
+[target.'cfg(any(target_os = "linux", target_os = "redox"))'.dependencies]
 mundy = { workspace = true, optional = true }
 raw-window-handle = { version = "0.6", optional = true }
 cctk = { workspace = true, optional = true }

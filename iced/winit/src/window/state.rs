@@ -280,7 +280,7 @@ where
             .unwrap_or_default();
 
         if self.theme_mode != new_mode {
-            #[cfg(not(target_os = "linux"))]
+            #[cfg(not(any(target_os = "linux", target_os = "redox")))]
             {
                 window.set_theme(conversion::window_theme(new_mode));
 
@@ -296,7 +296,7 @@ where
                 }
             }
 
-            #[cfg(target_os = "linux")]
+            #[cfg(any(target_os = "linux", target_os = "redox"))]
             {
                 // mundy always notifies system theme changes, so we
                 // just restore the default theme mode.

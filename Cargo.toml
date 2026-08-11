@@ -173,7 +173,7 @@ float-cmp = "0.10.0"
 ron = { workspace = true, optional = true }
 
 # Enable DBus feature on Linux targets
-[target.'cfg(target_os = "linux")'.dependencies]
+[target.'cfg(any(target_os = "linux", target_os = "redox"))'.dependencies]
 cosmic-config = { path = "cosmic-config", features = ["dbus"] }
 cosmic-settings-daemon = { git = "https://github.com/pop-os/dbus-settings-bindings", rev = "eed01dd" }
 zbus = { workspace = true }
@@ -261,3 +261,7 @@ zbus = { version = "5.15", default-features = false }
 
 [dev-dependencies]
 tempfile = "3.27.0"
+
+[patch."https://github.com/pop-os/winit.git"]
+winit = { git = "https://gitlab.com/sory-os/winit.git", branch = "redox-wayland-0.14" }
+winit-core = { git = "https://gitlab.com/sory-os/winit.git", branch = "redox-wayland-0.14" }

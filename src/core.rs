@@ -104,7 +104,7 @@ pub struct Core {
     #[cfg(feature = "single-instance")]
     pub(crate) single_instance: bool,
 
-    #[cfg(all(feature = "dbus-config", target_os = "linux"))]
+    #[cfg(all(feature = "dbus-config", any(target_os = "linux", target_os = "redox")))]
     pub(crate) settings_daemon: Option<cosmic_settings_daemon::CosmicSettingsDaemonProxy<'static>>,
 
     pub(crate) main_window: Option<window::Id>,
@@ -119,7 +119,7 @@ pub struct Core {
 
     pub(crate) app_type: AppType,
 
-    #[cfg(all(feature = "wayland", target_os = "linux"))]
+    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
     pub(crate) sync_window_border_radii_to_theme: bool,
 }
 
@@ -182,7 +182,7 @@ impl Default for Core {
             applet: crate::applet::Context::default(),
             #[cfg(feature = "single-instance")]
             single_instance: false,
-            #[cfg(all(feature = "dbus-config", target_os = "linux"))]
+            #[cfg(all(feature = "dbus-config", any(target_os = "linux", target_os = "redox")))]
             settings_daemon: None,
             portal_is_dark: None,
             portal_accent: None,
@@ -193,7 +193,7 @@ impl Default for Core {
             auto_blur: Auto::System | Auto::Popup | Auto::Window,
             auto_corner_radius: Auto::System | Auto::Popup | Auto::Window,
             app_type: AppType::Window,
-            #[cfg(all(feature = "wayland", target_os = "linux"))]
+            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
             sync_window_border_radii_to_theme: true,
         }
     }
@@ -394,7 +394,7 @@ impl Core {
         &self,
         config_id: &'static str,
     ) -> iced::Subscription<cosmic_config::Update<T>> {
-        #[cfg(all(feature = "dbus-config", target_os = "linux"))]
+        #[cfg(all(feature = "dbus-config", any(target_os = "linux", target_os = "redox")))]
         if let Some(settings_daemon) = self.settings_daemon.as_ref() {
             return cosmic_config::dbus::watcher_subscription(
                 settings_daemon.clone(),
@@ -415,7 +415,7 @@ impl Core {
         &self,
         state_id: &'static str,
     ) -> iced::Subscription<cosmic_config::Update<T>> {
-        #[cfg(all(feature = "dbus-config", target_os = "linux"))]
+        #[cfg(all(feature = "dbus-config", any(target_os = "linux", target_os = "redox")))]
         if let Some(settings_daemon) = self.settings_daemon.as_ref() {
             return cosmic_config::dbus::watcher_subscription(
                 settings_daemon.clone(),
@@ -527,12 +527,12 @@ impl Core {
     }
 
     // TODO should we emit tasks setting the corner radius or unsetting it if this is changed?
-    #[cfg(all(feature = "wayland", target_os = "linux"))]
+    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
     pub fn set_sync_window_border_radii_to_theme(&mut self, sync: bool) {
         self.sync_window_border_radii_to_theme = sync;
     }
 
-    #[cfg(all(feature = "wayland", target_os = "linux"))]
+    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
     pub fn sync_window_border_radii_to_theme(&self) -> bool {
         if !self.sync_window_border_radii_to_theme {
             return false;
@@ -605,7 +605,7 @@ impl Core {
 
     /// Calculate suggested corners for each app type main window
     #[must_use]
-    #[cfg(all(feature = "wayland", target_os = "linux"))]
+    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
     pub fn corners(
         &self,
         theme: &Theme,

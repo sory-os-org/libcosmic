@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 pub mod action;
-#[cfg(all(feature = "wayland", target_os = "linux"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
 pub mod corner_radius;
 
 use iced::{Limits, Size, Task};

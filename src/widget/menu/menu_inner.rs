@@ -6,7 +6,7 @@ use std::sync::Arc;
 
 use super::menu_bar::MenuBarState;
 use super::menu_tree::MenuTree;
-#[cfg(all(feature = "wayland", target_os = "linux"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
 use crate::app::cosmic::{WINDOWING_SYSTEM, WindowingSystem};
 use crate::style::menu_bar::StyleSheet;
 
@@ -671,7 +671,7 @@ impl<'b, Message: Clone + 'static> Menu<'b, Message> {
                         needs_reset |= self.close_condition.click_outside && !is_inside;
 
                         if needs_reset {
-                            #[cfg(all(feature = "wayland", target_os = "linux"))]
+                            #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                             if matches!(WINDOWING_SYSTEM.get(), Some(WindowingSystem::Wayland))
                                 && let Some(handler) = self.on_surface_action.as_ref()
                             {
@@ -978,7 +978,7 @@ impl<Message: std::clone::Clone + 'static> Widget<Message, crate::Theme, crate::
     ) {
         let new_root = self.update(event, layout, cursor, renderer, clipboard, shell);
 
-        #[cfg(all(feature = "wayland", target_os = "linux"))]
+        #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
         if matches!(WINDOWING_SYSTEM.get(), Some(WindowingSystem::Wayland))
             && let Some((new_root, new_ms)) = new_root
         {
@@ -1253,7 +1253,7 @@ pub(crate) fn init_root_menu<Message: Clone>(
     });
 }
 
-#[cfg(all(feature = "wayland", target_os = "linux"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
 pub(super) fn init_root_popup_menu<Message>(
     menu: &mut Menu<'_, Message>,
     renderer: &crate::Renderer,
@@ -1548,7 +1548,7 @@ where
             .as_ref()
             .is_some_and(|i| *i != new_index && !active_menu[*i].children.is_empty());
 
-        #[cfg(all(feature = "wayland", target_os = "linux"))]
+        #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
         if matches!(WINDOWING_SYSTEM.get(), Some(WindowingSystem::Wayland)) && remove {
             if let Some(id) = state.popup_id.remove(&menu.window_id) {
                 state.active_root.truncate(menu.depth + 1);

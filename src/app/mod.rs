@@ -65,7 +65,7 @@ pub(crate) fn iced_settings<App: Application>(
     let mut window_settings = iced::window::Settings::default();
     window_settings.exit_on_close_request = exit_on_close;
     iced.id = Some(App::APP_ID.to_owned());
-    #[cfg(target_os = "linux")]
+    #[cfg(any(target_os = "linux", target_os = "redox"))]
     {
         window_settings.platform_specific.application_id = App::APP_ID.to_string();
     }
@@ -390,7 +390,7 @@ where
             crate::widget::nav_bar(nav_model, |id| crate::Action::Cosmic(Action::NavBar(id)))
                 .on_context(|id| crate::Action::Cosmic(Action::NavBarContext(id)))
                 .context_menu(self.nav_context_menu());
-        #[cfg(all(feature = "wayland", target_os = "linux"))]
+        #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
         {
             nav = nav
                 .window_id_maybe(self.core().main_window_id())

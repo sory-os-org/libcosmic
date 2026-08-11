@@ -103,7 +103,7 @@ impl<'a, Message: Clone + 'static> NavBar<'a, Message> {
         self
     }
 
-    #[cfg(all(feature = "wayland", target_os = "linux"))]
+    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
     #[must_use]
     pub fn on_surface_action(
         mut self,

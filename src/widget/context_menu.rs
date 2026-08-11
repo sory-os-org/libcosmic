@@ -3,7 +3,7 @@
 
 //! A context menu is a menu in a graphical user interface that appears upon user interaction, such as a right-click mouse operation.
 
-#[cfg(all(feature = "wayland", target_os = "linux"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
 use crate::app::cosmic::{WINDOWING_SYSTEM, WindowingSystem};
 use crate::widget::menu::{
     self, CloseCondition, Direction, ItemHeight, ItemWidth, MenuBarState, PathHighlight,
@@ -60,7 +60,7 @@ pub struct ContextMenu<'a, Message> {
 }
 
 impl<Message: Clone + 'static> ContextMenu<'_, Message> {
-    #[cfg(all(feature = "wayland", target_os = "linux"))]
+    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
     #[allow(clippy::too_many_lines)]
     fn create_popup(
         &mut self,
@@ -382,7 +382,7 @@ impl<Message: 'static + Clone> Widget<Message, crate::Theme, crate::Renderer>
                 state.active_root.clear();
                 state.open = false;
 
-                #[cfg(all(feature = "wayland", target_os = "linux"))]
+                #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                 if matches!(WINDOWING_SYSTEM.get(), Some(WindowingSystem::Wayland))
                     && let Some(id) = state.popup_id.remove(&self.window_id)
                 {
@@ -421,7 +421,7 @@ impl<Message: 'static + Clone> Widget<Message, crate::Theme, crate::Renderer>
                     state.open = true;
                     state.view_cursor = cursor;
                 });
-                #[cfg(all(feature = "wayland", target_os = "linux"))]
+                #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                 if matches!(WINDOWING_SYSTEM.get(), Some(WindowingSystem::Wayland)) {
                     self.create_popup(layout, cursor, renderer, shell, viewport, state);
                 }
@@ -438,7 +438,7 @@ impl<Message: 'static + Clone> Widget<Message, crate::Theme, crate::Renderer>
                     state.active_root.clear();
                     state.open = false;
 
-                    #[cfg(all(feature = "wayland", target_os = "linux"))]
+                    #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
                     if matches!(WINDOWING_SYSTEM.get(), Some(WindowingSystem::Wayland))
                         && let Some(id) = state.popup_id.remove(&self.window_id)
                     {
@@ -472,7 +472,7 @@ impl<Message: 'static + Clone> Widget<Message, crate::Theme, crate::Renderer>
         _viewport: &iced::Rectangle,
         translation: Vector,
     ) -> Option<iced_core::overlay::Element<'b, Message, crate::Theme, crate::Renderer>> {
-        #[cfg(all(feature = "wayland", target_os = "linux"))]
+        #[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
         if matches!(WINDOWING_SYSTEM.get(), Some(WindowingSystem::Wayland))
             && self.window_id != window::Id::NONE
             && self.on_surface_action.is_some()

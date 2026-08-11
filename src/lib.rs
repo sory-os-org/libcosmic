@@ -166,7 +166,7 @@ pub(crate) mod malloc;
 pub mod process;
 
 #[doc(inline)]
-#[cfg(all(feature = "wayland", target_os = "linux"))]
+#[cfg(all(feature = "wayland", any(target_os = "linux", target_os = "redox")))]
 pub use cctk;
 
 pub mod surface;

@@ -92,7 +92,7 @@ impl Clipboard {
                 })
                 .unwrap_or(State::Unavailable);
 
-        #[cfg(target_os = "linux")]
+        #[cfg(any(target_os = "linux", target_os = "redox"))]
         if let State::Connected { clipboard, .. } = &state {
             clipboard.init_dnd(Box::new(sender));
         }
