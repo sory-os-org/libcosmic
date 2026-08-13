@@ -6,11 +6,9 @@ edition = "2024"
 publish = false
 
 [dependencies]
-iced = { workspace = true }
-iced.features = ["debug", "image", "advanced", "tokio"]
+iced = { workspace = true, features = ["debug", "image", "advanced", "tokio"] }
 
-image = { workspace = true }
-image.features = ["png"]
+image = { workspace = true, features = ["png"] }
 
 tokio = { workspace = true }
 

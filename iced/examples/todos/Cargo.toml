@@ -9,22 +9,19 @@ publish = false
 tester = ["iced/tester"]
 
 [dependencies]
-iced = { workspace = true }
-iced.features = ["tokio", "debug", "time-travel", "winit", "wgpu", "wayland"]
+iced = { workspace = true, features = ["tokio", "debug", "time-travel", "winit", "wgpu", "wayland"] }
 
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 uuid = { version = "1.0", features = ["v4", "fast-rng", "serde"] }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-tokio = { workspace = true }
-tokio.features = ["fs", "time"]
+tokio = { workspace = true, features = ["fs", "time"] }
 directories = "6.0"
 tracing-subscriber = "0.3"
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-iced = { workspace = true }
-iced.features = ["debug", "webgl", "fira-sans"]
+iced = { workspace = true, features = ["debug", "webgl", "fira-sans"] }
 
 uuid = { version = "1.0", features = ["js"] }
 web-sys = { workspace = true, features = ["Window", "Storage"] }

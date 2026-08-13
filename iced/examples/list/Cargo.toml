@@ -6,5 +6,4 @@ edition = "2021"
 publish = false
 
 [dependencies]
-iced = { workspace = true }
-iced.features = ["debug", "winit", "tokio", "wayland"]
+iced = { workspace = true, features = ["debug", "winit", "tokio", "wayland"] }

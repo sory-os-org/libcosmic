@@ -9,17 +9,14 @@ publish = false
 large_enum_variant = "allow"
 
 [dependencies]
-iced = { workspace = true }
-iced.features = ["tokio", "markdown", "highlighter", "debug"]
+iced = { workspace = true, features = ["tokio", "markdown", "highlighter", "debug"] }
 
 log = { workspace = true }
 thiserror = { workspace = true }
 
-tokio.features = ["fs", "process"]
-tokio = { workspace = true }
+tokio = { workspace = true, features = ["fs", "process"] }
 
-serde = { workspace = true }
-serde.features = ["derive"]
+serde = { workspace = true, features = ["derive"] }
 
 jiff = "0.2"
 webbrowser = "1"

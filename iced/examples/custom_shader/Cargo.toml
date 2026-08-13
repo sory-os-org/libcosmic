@@ -5,13 +5,11 @@ authors = ["Bingus <shankern@protonmail.com>"]
 edition = "2024"
 
 [dependencies]
-iced = { workspace = true }
-iced.features = ["debug", "image", "advanced"]
+iced = { workspace = true, features = ["debug", "image", "advanced"] }
 
 image = { workspace = true }
 bytemuck = { workspace = true }
 
-glam = { workspace = true }
-glam.features = ["bytemuck"]
+glam = { workspace = true, features = ["bytemuck"] }
 
 rand = "0.8.5"

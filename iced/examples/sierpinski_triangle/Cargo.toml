@@ -6,7 +6,6 @@ edition = "2018"
 publish = false
 
 [dependencies]
-iced = { workspace = true }
-iced.features = ["debug", "canvas"]
+iced = { workspace = true, features = ["debug", "canvas"] }
 
 rand = "0.8"

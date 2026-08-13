@@ -6,14 +6,11 @@ edition = "2024"
 publish = false
 
 [dependencies]
-iced = { workspace = true }
-iced.features = ["tokio", "sipper", "image", "debug"]
+iced = { workspace = true, features = ["tokio", "sipper", "image", "debug"] }
 
-reqwest.version = "0.12"
-reqwest.features = ["json"]
+reqwest = { version = "0.12", features = ["json"] }
 
-serde.version = "1.0"
-serde.features = ["derive"]
+serde = { version = "1.0", features = ["derive"] }
 
 bytes = { workspace = true }
 image = { workspace = true }
