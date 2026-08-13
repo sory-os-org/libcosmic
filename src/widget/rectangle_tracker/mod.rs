@@ -275,7 +275,7 @@ where
         cursor_position: mouse::Cursor,
         viewport: &Rectangle,
     ) {
-        let _ = self.tx.unbounded_send((self.id, layout.bounds()));
+        let _ = self.tx.unbounded_send((self.id.clone(), layout.bounds()));
         self.container.draw(
             tree,
             renderer,
