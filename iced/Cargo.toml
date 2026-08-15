@@ -268,8 +268,8 @@ tiny-skia = { version = "0.11", default-features = false, features = [
     "std",
     "simd",
 ] }
-cctk = { git = "https://github.com/pop-os/cosmic-protocols", package = "cosmic-client-toolkit", rev = "32283d7" }
-softbuffer = { git = "https://github.com/pop-os/softbuffer", tag = "cosmic-4.0" }
+cctk = { git = "https://github.com/sory-os-org/cosmic-protocols", package = "cosmic-client-toolkit", rev = "32283d7" }
+softbuffer = { git = "https://github.com/sory-os-org/softbuffer", tag = "cosmic-4.0" }
 syntect = "5.2"
 tokio = "1.0"
 tracing = "0.1"
@@ -295,11 +295,11 @@ wayland-client = { version = "0.31.5" }
 winapi = "0.3"
 # window_clipboard = "0.4.1"
 
-window_clipboard = { git = "https://github.com/pop-os/window_clipboard.git", tag = "sctk-0.20" }
-dnd = { git = "https://github.com/pop-os/window_clipboard.git", tag = "sctk-0.20" }
-mime = { git = "https://github.com/pop-os/window_clipboard.git", tag = "sctk-0.20" }
-winit = { git = "https://github.com/pop-os/winit.git", tag = "cosmic-0.14" }
-winit-core = { git = "https://github.com/pop-os/winit.git", tag = "cosmic-0.14" }
+window_clipboard = { git = "https://github.com/sory-os-org/window_clipboard.git", tag = "sctk-0.20" }
+dnd = { git = "https://github.com/sory-os-org/window_clipboard.git", tag = "sctk-0.20" }
+mime = { git = "https://github.com/sory-os-org/window_clipboard.git", tag = "sctk-0.20" }
+winit = { git = "https://github.com/sory-os-org/winit.git", tag = "cosmic-0.14" }
+winit-core = { git = "https://github.com/sory-os-org/winit.git", tag = "cosmic-0.14" }
 cursor-icon = "1.1.0"
 
 
